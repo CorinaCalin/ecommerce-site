@@ -1,10 +1,11 @@
 import React from 'react'
-import { Navbar } from './Navbar'
-import { Products } from './Products'
+import '../css/Home.css'
+import { Navbar } from '../components/Navbar'
+import { Products } from '../components/Products'
 
 export const Home = () => {
     return (
-        <div>
+        <div className='wrapper'>
             <Navbar />
             <Products />
         </div>
