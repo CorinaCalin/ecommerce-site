@@ -1,7 +1,9 @@
-import * as firebase from 'firebase';
-import 'firebase/auth';
-import 'firebase/firestore';
-import 'firebase/storage';
+//import firebase from 'firebase/app';
+//import * as firebase from 'firebase';
+//pentru versiunile noi de firebase
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";

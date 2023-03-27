@@ -1,4 +1,5 @@
 import React,{useState} from 'react'
+import {storage, db} from '../config/Config'
 
 export const AddProducts = () => {
 
@@ -25,7 +26,29 @@ export const AddProducts = () => {
 
     const addProduct = (e) =>{
         e.preventDefault();
-        console.log(productName, productPrice, productImg);
+        //console.log(productName, productPrice, productImg);
+        const uploadTask = storage.ref(`product-images/${productImg.name}`).put(productImg);
+        uploadTask.on('state_changed', snapshot=>
+        {
+            const progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
+            console.log(progress);
+        },err=>{
+            setError(err.message)
+        },()=>{
+            storage.ref('product-images').child(productImg.name).getDownloadURL().then(url=>{
+                db.collection('Products').add({
+                    productName: productName,
+                    productPrice: Number(productPrice),
+                    productImg: url
+                }).then(()=>{
+                    setProductName('');
+                    setProductPrice(0);
+                    setProductImg('');
+                    setError('');
+                    document.getElementById('file').value = '';
+                }).catch(err => setError(err.message));
+            })
+        })
     }
 
     return (
@@ -48,7 +71,7 @@ export const AddProducts = () => {
                 <br />
                 <label htmlFor="product-img">Product Image</label>
                 <br />
-                <input type="file" className='form-control' onChange={productImgHandler} />
+                <input type="file" className='form-control' onChange={productImgHandler} id='file'/>
                 <br />
                 <buttom className='btn btn-success btn-md mybtn'>ADD</buttom>  
             </form>
