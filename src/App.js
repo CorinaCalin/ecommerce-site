@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Home } from './components/Home'
 import { AddProducts } from './components/AddProducts'
+import { db } from './config/Config';
 
 export class App extends Component {
   render() {

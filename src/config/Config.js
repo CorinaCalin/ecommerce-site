@@ -1,9 +1,15 @@
 //import firebase from 'firebase/app';
 //import * as firebase from 'firebase';
+
 //pentru versiunile noi de firebase
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -27,9 +33,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-firebase.initializeApp(firebase.auth);
-const auth = firebase.auth();
-const db = firebase.firestore();
-const storage = firebase.storage();
+//firebase.initializeApp(firebase.auth);
+//firebase.initializeApp();
+//const auth = firebase.auth();
+//const db = firebase.firestore();
+
+
+//const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore();
+const storage = getStorage(app);
 
 export {auth, db, storage}
